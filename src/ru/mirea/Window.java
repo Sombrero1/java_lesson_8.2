@@ -16,6 +16,8 @@ public class Window extends JFrame {
     Window(String cmd){
         super("Example");
 
+
+
         this.cmd=cmd;
 
 
@@ -36,6 +38,14 @@ public class Window extends JFrame {
 
     }
 
+    public void selectPicture(String cmdArg){
+        try {
+            image = ImageIO.read(new File(cmdArg));
+            System.out.println("Work!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void paint(Graphics g) {
