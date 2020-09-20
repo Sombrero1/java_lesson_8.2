@@ -9,32 +9,39 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Window extends JFrame {
-    JTextField jta = new JTextField(10);
-    public String cmd;
+
+    Image image;
+    String cmd;
+
     Window(String cmd){
         super("Example");
-        setLayout(new FlowLayout());
-        setSize(1850,1080);
-        jta.setForeground(Color.GREEN);
-        setVisible(true);
+
         this.cmd=cmd;
 
+
+        try {
+            image = ImageIO.read(new File(cmd));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setBounds(0,0,image.getHeight(null),image.getWidth(null));
+
+        Container container = getContentPane();
+        container.setLayout(new GridLayout());
+
+
+        setVisible(true);
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // выход при закрытии
 
     }
 
 
     @Override
     public void paint(Graphics g) {
-        Image image;
-        try
-        {
-            image = ImageIO.read(new File(cmd));
-            g.drawImage(image,0,0,null);
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
 
+            if(image!=null) {
+                g.drawImage(image, 0, 0, null);
+            }
 }
 }
